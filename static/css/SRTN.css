@@ -1,0 +1,56 @@
+.main_form {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+input {
+  padding: 0.5% 5%;
+  margin: 0.5%;
+  border-radius: 10px;
+  text-align: center;
+  color: black;
+  border: none;
+}
+
+#submit_btn {
+  padding: 0.6% 5%;
+  background-color: #00bbff;
+  border: 2px solid #00bbff;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+#submit_btn:hover {
+  background-color: #5ed4ff;
+  cursor: pointer;
+}
+
+td,
+th {
+  padding: 20px;
+  background-color: rgb(39, 39, 39);
+  text-align: center;
+  border: 1px solid #00bbff;
+}
+
+th {
+  background-color: #004863;
+}
+
+table {
+  border: 1px solid #00bbff;
+  border-collapse: collapse;
+}
+.process_table_div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.process_table {
+  margin: 2%;
+}

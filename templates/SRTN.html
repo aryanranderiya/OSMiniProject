@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRTN</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/SRTN.css') }}">
+</head>
+
+<body>
+
+    <form action="SRTNaddProcess" method="POST" class="main_form">
+        <h1>SRTN Emulator</h1>
+        <input type="text" placeholder="Process Name" required name="process_name">
+        <input type="number" placeholder="Arrival Time" min="1" required name="process_arrival">
+        <input type="number" placeholder="Burst Time" min="1" required name="process_burst">
+        <input type="submit" value="Add Process" id="submit_btn">
+
+    </form>
+    <br>
+
+    <div class="process_table_div">
+        {% if processes %}
+        <table class="process_table">
+            <tr>
+                <th>Process Name</th>
+                <th>Process Arrival</th>
+                <th>Process Burst Time</th>
+            </tr>
+            {% for process_name, process_info in processes.items() %}
+            <tr>
+                <td>{{ process_name }}</td>
+                <td>{{ process_info.process_arrival }}</td>
+                <td>{{ process_info.process_burst }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>No Processes have been created!.</p>
+        {% endif %}
+    </div>
+
+
+
+</body>
+
+</html>

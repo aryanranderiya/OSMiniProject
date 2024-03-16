@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Welcome!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+    <form action="home" method="POST" class="main_form">
+
+        <select name="select" id="select" required>
+            <option value="SRTN">Shortest Remaining Time Next (SRTN)</option>
+            <option value="PCBB">Producer Consumer bounded buffer problem with monitors</option>
+            <option value="SSTF">Shortest seek time first (SSTF) disk scheduling algorithm</option>
+            <option value="OPR">Optimal page replacement algorithm</option>
+        </select>
+
+        <input type="submit" value="Submit" id="submit_btn">
+    </form>
+</body>
+
+</html>
