@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producer Consumer</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">
+</head>
+
+<body>
+    <form action="addProcessPCBB" method="POST" class="main_form">
+        <h1>Producer & Consumer Problem with Bounded Buffer & Monitor</h1>
+        <input type="number" placeholder="Enter number of Processes to simulate " min="2" required
+            name="no_of_processes">
+        <input type="submit" value="Add Process" id="submit_btn">
+    </form>
+
+    {% if zipped_data %}
+    <h1>Produced consumed </h1>
+    <table class="process_table">
+        <tr>
+            <th>Produced & Consumed</th>
+            <th>Buffer</th>
+        </tr>
+
+        {% for item1, item2 in zipped_data %}
+        <tr>
+            <td>{{ item1 }}</td>
+            <td>{{ item2 }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    {% else %}
+    <p>No Processes have been created!</p>
+    {% endif %}
+</body>
+
+</html>

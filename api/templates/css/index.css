@@ -28,3 +28,7 @@
   background-color: #5ed4ff;
   cursor: pointer;
 }
+
+option {
+  color: black;
+}
