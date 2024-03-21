@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Producer Consumer</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/PCBB.css') }}">
 </head>
 
 <body>
@@ -16,25 +17,30 @@
         <input type="submit" value="Add Process" id="submit_btn">
     </form>
 
-    {% if zipped_data %}
-    <h1>Produced consumed </h1>
-    <table class="process_table">
-        <tr>
-            <th>Produced & Consumed</th>
-            <th>Buffer</th>
-        </tr>
+    <div class="process_table_div">
+        {% if zipped_data %}
+        <h1>Produced consumed </h1>
+        <table class="process_table">
+            <tr>
+                <th>Produced & Consumed</th>
+                <th>Buffer</th>
+            </tr>
 
-        {% for item1, item2 in zipped_data %}
-        <tr>
-            <td>{{ item1 }}</td>
-            <td>{{ item2 }}</td>
-        </tr>
-        {% endfor %}
+            {% for item1, item2 in zipped_data %}
+            <tr>
+                <td
+                    class="{% if item1.startswith('Produced') %}produced{% elif item1.startswith('Consumed') %}consumed{% endif %}">
+                    {{ item1 }}</td>
+                <td class="buffer_td">{{ item2 }}</td>
+            </tr>
+            {% endfor %}
 
-    </table>
-    {% else %}
-    <p>No Processes have been created!</p>
-    {% endif %}
+        </table>
+        {% else %}
+        <p>No Processes have been created!</p>
+        {% endif %}
+    </div>
+
 </body>
 
 </html>

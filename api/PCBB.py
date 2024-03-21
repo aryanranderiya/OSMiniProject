@@ -20,20 +20,28 @@ class Monitor:
     condition_vars = threading.Condition(monitor_lock)
 
     def __init__(self):
-        self.buffer_list = []  # Maintain history of all the buffers
-        self.produce_consumed_list = []  # Maintain history of all produced/consumed items
+        self._buffer_list = []  # Maintain history of all the buffers
+        self._produce_consumed_list = []  # Maintain history of all produced/consumed items
 
-    def add_buffer_list(self, buffer: list) -> None:
-        self.buffer_list.append(buffer)
+    @property
+    def buffer_list(self):
+        return self._buffer_list
 
-    def get_buffer(self) -> list:
-        return self.buffer_list
+    def add_buffer_list(self, buffer: list):
 
-    def add_prod_cons_list(self, obj: str) -> None:
-        self.produce_consumed_list.append(obj)
+        if not buffer:
+            buffer = "Buffer is Empty"
+        else:
+            buffer = ", ".join(buffer)
 
-    def get_produced_consumed(self) -> list:
-        return self.produce_consumed_list
+        self._buffer_list.append(buffer)
+
+    @property
+    def produce_consumed_list(self):
+        return self._produce_consumed_list
+
+    def add_prod_cons_list(self, obj: str):
+        self._produce_consumed_list.append(obj)
 
     def wait(self) -> None:
         """
@@ -75,6 +83,8 @@ class Monitor:
 
         self.add_buffer_list(copy.deepcopy(self.buffer))
         self.add_prod_cons_list(f"Produced {item_index}")
+        # self.buffer_list = copy.deepcopy(self.buffer)
+        # self.produce_consumed_list = f"Produced {item_index}"
 
         self.signal()  # Notify the monitor that it is free
 
@@ -101,6 +111,9 @@ class Monitor:
 
         self.add_buffer_list(copy.deepcopy(self.buffer))
         self.add_prod_cons_list(f"Consumed {item}")
+        # self.buffer_list = copy.deepcopy(self.buffer)
+        # self.produce_consumed_list = f"Consumed {item}"
+
         # self.add_prod_cons_list(
         #     f"Number of Items left in Buffer: {len(self.buffer)}")
 
@@ -115,10 +128,9 @@ def produce_consume(item_index: int, process_times: list, monitor: Monitor) -> N
     This method will be a thread called in "process_as_begin"
     """
     # seconds = process_times[item_index]
-    # seconds = random.expovariate(0.5)
-    seconds = random.uniform(0.1, 3)
+    seconds = random.uniform(0, 2.5)
+    # seconds = 0
 
-    # seconds = 1
     item_index = str(item_index + 1)
 
     monitor.produce(item_index, seconds)

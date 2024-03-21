@@ -44,8 +44,9 @@ def app_ProducerConsumer():
     monitor = PCBB.Monitor()
 
     PCBB.process_as_begin(no_of_processes, [], monitor)
-    buffer_content = monitor.get_buffer()
-    produced_consumed = monitor.get_produced_consumed()
+
+    buffer_content = monitor.buffer_list
+    produced_consumed = monitor.produce_consumed_list
 
     zipped_data = zip(produced_consumed, buffer_content)
 

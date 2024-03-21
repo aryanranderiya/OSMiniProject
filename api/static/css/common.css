@@ -1,3 +1,17 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+body {
+  background-color: black;
+  margin: 0;
+}
+
+input {
+  color: black;
+}
+
 .main_form {
   height: 50vh;
   width: 100%;
@@ -34,21 +48,23 @@ th {
   padding: 20px;
   background-color: rgb(39, 39, 39);
   text-align: center;
-  border: 1px solid #00bbff;
+  border: 1px solid white;
 }
 
 th {
-  background-color: #004863;
+  background-color: #535353;
 }
 
 table {
-  border: 1px solid #00bbff;
+  border: 1px solid white;
   border-collapse: collapse;
 }
 .process_table_div {
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .process_table {
