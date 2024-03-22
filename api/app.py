@@ -43,12 +43,13 @@ def app_ProducerConsumer():
 
     monitor = PCBB.Monitor()
 
-    PCBB.process_as_begin(no_of_processes, [], monitor)
+    PCBB.process_as_begin(no_of_processes, monitor)
 
-    buffer_content = monitor.buffer_list
+    buffer_history = monitor.buffer_history
     produced_consumed = monitor.produce_consumed_list
+    buffer_state_list = monitor.buffer_state_list
 
-    zipped_data = zip(produced_consumed, buffer_content)
+    zipped_data = zip(produced_consumed, buffer_history, buffer_state_list)
 
     return render_template('PCBB.html', zipped_data=zipped_data)
 

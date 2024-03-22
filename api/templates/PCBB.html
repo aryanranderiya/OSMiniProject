@@ -22,18 +22,26 @@
         <h1>Produced consumed </h1>
         <table class="process_table">
             <tr>
+                <th></th>
                 <th>Produced & Consumed</th>
                 <th>Buffer</th>
+                <th>Buffer State</th>
             </tr>
 
-            {% for item1, item2 in zipped_data %}
+            {% for item1, item2, item3 in zipped_data %}
             <tr>
-                <td
-                    class="{% if item1.startswith('Produced') %}produced{% elif item1.startswith('Consumed') %}consumed{% endif %}">
-                    {{ item1 }}</td>
+                <td>{{ loop.index }}</td>
+                <td class="{% if item1.startswith('Produced') %}produced{% elif item1.startswith('Consumed') %}consumed{%
+                    endif %}">
+                    {{ item1 }}
+                </td>
                 <td class="buffer_td">{{ item2 }}</td>
+                <td class="buffer_td">{{ item3 }}</td>
             </tr>
             {% endfor %}
+            <tr>
+                <td colspan="4">No Processes Left</td>
+            </tr>
 
         </table>
         {% else %}
