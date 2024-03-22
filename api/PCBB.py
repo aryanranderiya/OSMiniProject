@@ -18,7 +18,7 @@ class Monitor:
     # Lock object for the Monitor from which synchronisation will occur
     monitor_lock = threading.Lock()
 
-    # object with which monitor will wait and notify
+    # Condition object with which monitor will sychronise threades based on 'monitor_lock'
     condition_vars = threading.Condition(monitor_lock)
 
     def __init__(self):
