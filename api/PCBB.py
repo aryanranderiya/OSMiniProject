@@ -89,11 +89,16 @@ class Monitor:
             if buffer_count is BUFFER_SIZE:  # If the Buffer is full then wait
                 self.condition_vars.wait()
 
-            self.buffer.append(item_name)  # Insert new item into buffer
+            # Insert new item into buffer
+            self.buffer.append(item_name)
 
+            # Notify monitor that it is now free
             self.condition_vars.notify()  # Notify the monitor that it is free
 
+            # Keep track of consumed items
             self.add_prod_cons_list(f"Produced {item_name}")
+
+            # Keep track of the buffer
             self.add_buffer_history()
 
     def consume(self) -> None:
@@ -117,7 +122,6 @@ class Monitor:
             # Keep track of the buffer
             self.add_buffer_history()
 
-#
     # ! End of class ^
 
 
@@ -126,9 +130,10 @@ def producer(monitor: Monitor, no_of_processes: int) -> None:  # Insert into buf
     The producer inserts items into the bounded buffer and ensures synchronisation by using wait and signal methods
     of the monitor.
     """
+
     for count in range(no_of_processes):
         item_name: str = "P" + str(count)  # Format the item name
-        monitor.produce(item_name)
+        monitor.produce(item_name)  # Call the Monitors produce method
 
 
 def consumer(monitor: Monitor, no_of_processes: int) -> None:
@@ -138,7 +143,7 @@ def consumer(monitor: Monitor, no_of_processes: int) -> None:
     """
 
     for _ in range(no_of_processes):
-        monitor.consume()
+        monitor.consume()  # Call the Monitors consume method
 
 
 def process_as_begin(no_of_processes: int, monitor=Monitor()) -> None:  # process as begin
@@ -172,6 +177,7 @@ def main() -> None:
     Won't be executed using flask.
     Takes user input and passes to "processs_as_begin" to create threads for producer & consumer
     """
+
     while True:
         no_of_processes = int(input('Enter No. of Processes: '))
 
