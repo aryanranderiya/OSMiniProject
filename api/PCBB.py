@@ -5,7 +5,7 @@ import copy
 
 # Constants
 EMPTY = 0
-BUFFER_SIZE = 6
+BUFFER_SIZE = 5
 
 
 class Monitor:
@@ -25,6 +25,8 @@ class Monitor:
         self._buffer_history = []  # Maintain history of all the buffers
         self._produce_consumed = []  # Maintain history of all produced/consumed items
         self._buffer_states = []  # Maintain history of all produced/consumed items
+
+    # Properties to display on the Frontend
 
     @property
     def buffer_history(self) -> list:
@@ -85,8 +87,6 @@ class Monitor:
             buffer_count = len(self.buffer)  # Number of elements in the buffer
 
             if buffer_count is BUFFER_SIZE:  # If the Buffer is full then wait
-                # print("Buffer FULL, Producer is waiting for Consumer...")
-                # print('------------------------------------------------')
                 self.condition_vars.wait()
 
             self.buffer.append(item_name)  # Insert new item into buffer
@@ -96,9 +96,6 @@ class Monitor:
             self.add_prod_cons_list(f"Produced {item_name}")
             self.add_buffer_history()
 
-            # print(f"Produced {item_name}, Buffer: {self.buffer}")
-            # print('------------------------------------------------')
-
     def consume(self) -> None:
         """
         Monitor public method for consumer to access
@@ -106,8 +103,6 @@ class Monitor:
         with self.monitor_lock:
 
             if not self.buffer:  # Ensure buffer is not empty
-                # print("Buffer EMPTY, Consumer is waiting for Producer ...")
-                # print('------------------------------------------------')
                 self.condition_vars.wait()
 
             # Remove item from buffer
@@ -122,8 +117,6 @@ class Monitor:
             # Keep track of the buffer
             self.add_buffer_history()
 
-            # print(f"Consumed {item_name}, Buffer: {self.buffer}")
-            # print('------------------------------------------------')
 #
     # ! End of class ^
 

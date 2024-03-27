@@ -10,12 +10,60 @@
 </head>
 
 <body>
-    <form action="addProcessPCBB" method="POST" class="main_form">
-        <h1>Producer & Consumer Problem with Bounded Buffer & Monitor</h1>
+    <div class="main">
+        <h1 class="title">Producer & Consumer Problem with Bounded Buffer & Monitor</h1>
+        <p class="information">
+            A producer process produces information that is consumed by a consumer process. <br><br>
+
+            The producer-consumer problem is a classic issue in computer science that involves two types of processes:
+            producers and consumers, which share a common buffer.
+            <br> The problem arises when producers
+            generate items and place them into the buffer, while consumers retrieve and process these items from the
+            buffer.
+            <br>
+            <br>
+
+            The challenge is to ensure that:
+            <br>
+            - Producers don't put items into the buffer if it's full.
+            <br>
+            - Consumers don't try to take items from an empty buffer.
+            <br><br>
+
+            In a Producer Consumer Problem, Two types of buffers can be used:<br><br>
+            The <u>Unbounded Buffer</u> places no practical
+            limit on the size of the buffer. The consumer may have to wait for new items,
+            but the producer can always produce new items.
+            <br><br>
+            The <u>Bounded Buffer</u> assumes
+            a fixed buffer size. In this case, the consumer must wait if the buffer is empty,
+            and the producer must wait if the buffer is full.
+
+            <br><br>
+            In the semaphore solution to the critical-section problem. Each process must execute wait (mutex) before
+            entering the critical section and signal (mutex) after exiting the critical section.
+            <br>
+            The sequence in which the wait and signal methods of a semaphore is executed must be perfect or else it
+            will lead to synchronization issues such as deadlock.
+        </p>
+        <h2>Monitors</h2>
+        <br>
+        <p class="information">
+            So what is a Monitor? It is a high level synchronization construct that contains different operations and
+            declaration of shared variables that provide mutual exclusion. <br>
+
+            The Producer and Consumer can only itneract with the Monitors methods and the methods will then work with
+            shared variables.
+        </p>
+    </div>
+
+    <form action="/PCBB" method="POST" class="main_form">
+        <h1>Simulator</h1>
         <input type="number" placeholder="Enter Number of Processes for the Bounded Buffer" min="1" required
             name="no_of_processes">
         <input type="submit" value="Add Process" id="submit_btn">
     </form>
+
 
     <div class="process_table_div">
         {% if zipped_data %}

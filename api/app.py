@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect
-import SRTN
-import PCBB
+from api import SRTN, PCBB
 import time
 
 app = Flask(__name__)
@@ -32,12 +31,10 @@ def selectedOption():
 @app.route("/addProcessSRTN", methods=["POST"])
 def app_SRTN():
     processes = SRTN.addProcess(request.form)
-    # gantt_chart = SRTN.generateGanttChart()
-    # print("------------------------------------", gantt_chart)
     return render_template('SRTN.html', processes=processes)
 
 
-@app.route("/addProcessPCBB", methods=["POST"])
+@app.route("/PCBB", methods=["POST"])
 def app_ProducerConsumer():
     form = request.form
     no_of_processes = int(form['no_of_processes'])

@@ -5,3 +5,21 @@
 .consumed {
   background-color: #770000;
 }
+
+.information {
+  text-align: justify;
+  width: 60%;
+  font-size: 1.2em;
+}
+
+.title {
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
