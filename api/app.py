@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
-from api import SRTN, PCBB
+import SRTN
+import PCBB
 import time
 
 app = Flask(__name__)
