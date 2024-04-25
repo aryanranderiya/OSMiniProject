@@ -1,5 +1,7 @@
 import threading
 import copy
+import time
+import random
 
 # Constants
 EMPTY = 0
@@ -13,10 +15,13 @@ class Monitor:
 
     buffer = []  # Shared buffer
 
-    # Lock object for the Monitor from which synchronisation will occur
+    # Lock object for the Monitor that provides exclusive access to a shared resource in a multithreaded application
+    # Can also be known as a mutex
+    # Forces threads to access the shared resource 1 at a time instead of all at once
     monitor_lock = threading.Lock()
 
     # Condition object with which monitor will sychronise threades based on 'monitor_lock'
+    # A condition variable allows one or more threads to wait until they are notified by another thread.
     condition_vars = threading.Condition(monitor_lock)
 
     def __init__(self):
@@ -80,11 +85,16 @@ class Monitor:
         Monitor public method for consumer to access & 'append'
         """
 
+        # With is used for exceptional handling
         with self.monitor_lock:
+
+            time.sleep(random.uniform(0, 2))  # Simulate some running time
 
             buffer_count = len(self.buffer)  # Number of elements in the buffer
 
             if buffer_count is BUFFER_SIZE:  # If the Buffer is full then wait
+                print("Buffer FULL, Producer is waiting for Consumer...")
+                print('------------------------------------------------')
                 self.condition_vars.wait()
 
             # Insert new item into buffer
@@ -99,13 +109,20 @@ class Monitor:
             # Keep track of the buffer
             self.add_buffer_history()
 
+            print(f"Produced {item_name}, Buffer: {self.buffer}")
+            print('------------------------------------------------')
+
     def consume(self) -> None:
         """
         Monitor public method for consumer to access
         """
         with self.monitor_lock:
 
+            # time.sleep(random.uniform(0, 1))  # Simulate some running time
+
             if not self.buffer:  # Ensure buffer is not empty
+                print("Buffer EMPTY, Consumer is waiting for Producer ...")
+                print('------------------------------------------------')
                 self.condition_vars.wait()
 
             # Remove item from buffer
@@ -119,6 +136,9 @@ class Monitor:
 
             # Keep track of the buffer
             self.add_buffer_history()
+
+            print(f"Consumed {item_name}, Buffer: {self.buffer}")
+            print('------------------------------------------------')
 
     # ! End of class ^
 

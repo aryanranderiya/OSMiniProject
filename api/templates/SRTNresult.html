@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRTN Algorithm Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">
+
+</head>
+
+<body>
+    <center>
+        <h1>Shortest Remaining Time Next (SRTN) Algorithm Result</h1>
+        <table border="1">
+            <tr>
+                <th>JobName</th>
+                <th>Arrival Time</th>
+                <th>Burst Time</th>
+                <th>Finish Time</th>
+                <th>Turnaround Time</th>
+                <th>Waiting Time</th>
+            </tr>
+            {% for job_info in jobs_info %}
+            <tr>
+                <td>{{ job_info['JobName'] }}</td>
+                <td>{{ job_info['Arrival Time'] }}</td>
+                <td>{{ job_info['Burst Time'] }}</td>
+                <td>{{ job_info['Finish Time'] }}</td>
+                <td>{{ job_info['Turnaround Time'] }}</td>
+                <td>{{ job_info['Waiting Time'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+
+</body>
+
+</html>

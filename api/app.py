@@ -1,8 +1,6 @@
 from flask import Flask, render_template, request, redirect
-import SRTN
-import PCBB
-import time
-
+from api import PCBB
+from api.SRTN import srtf
 app = Flask(__name__)
 
 
@@ -29,10 +27,32 @@ def selectedOption():
         return "Invalid Option"
 
 
-@app.route("/addProcessSRTN", methods=["POST"])
-def app_SRTN():
-    processes = SRTN.addProcess(request.form)
-    return render_template('SRTN.html', processes=processes)
+@app.route('/SRTN', methods=['GET', 'POST'])
+def SRTN():
+    if request.method == 'POST':
+        arrival_times = list(
+            map(int, request.form.get('arrival_times').split(',')))
+        burst_times = list(
+            map(int, request.form.get('burst_times').split(',')))
+
+        completion_time, turnaround_time, waiting_time = srtf(
+            arrival_times, burst_times)
+
+        jobs_info = []
+        for i in range(len(arrival_times)):
+            job_info = {
+                'JobName': f'Job {i+1}',
+                'Arrival Time': arrival_times[i],
+                'Burst Time': burst_times[i],
+                'Finish Time': completion_time[i],
+                'Turnaround Time': turnaround_time[i],
+                'Waiting Time': waiting_time[i]
+            }
+            jobs_info.append(job_info)
+
+        return render_template('SRTNresult.html', jobs_info=jobs_info)
+
+    return render_template('SRTN.html')
 
 
 @app.route("/PCBB", methods=["POST"])
