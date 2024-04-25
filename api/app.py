@@ -40,7 +40,7 @@ def selectedOption():
 # Route for handling Shortest Remaining Time Next (SRTN) algorithm
 
 
-@app.route('/SRTN', methods=['GET', 'POST'])
+@app.route('/SRTN', methods=['POST'])
 def SRTN():
     # Get arrival times and burst times from the form
     arrival_times = list(
@@ -95,24 +95,21 @@ def app_ProducerConsumer():
 # Route for handling Optimal Page Replacement (OPR) algorithm
 
 
-@app.route('/OPR', methods=['GET', 'POST'])
+@app.route('/OPR', methods=['POST'])
 def OPR():
-
-    # Extracting page references and capacity from the form submitted by the user
-    # List of page references converted to integers
+    # Extract page references and capacity from the form
     pages = list(map(int, request.form['pages'].split(',')))
-    capacity = int(request.form['capacity'])  # Capacity of page frames
+    capacity = int(request.form['capacity'])
 
-    # Performing Optimal Page Replacement (OPR) algorithm
-    # This function returns the number of page faults and details of each page fault
+    # Perform Optimal Page Replacement algorithm
     page_faults, page_fault_details = optimal_page_replacement(pages, capacity)
 
-    # Rendering the OPR template with the results and form inputs
-    # The page_faults, page_fault_details, pages, and capacity are passed to the template for displaying on the frontend
+    # Render template with results and form inputs
     return render_template('OPR.html', page_faults=page_faults, page_fault_details=page_fault_details, pages=request.form['pages'], capacity=request.form['capacity'])
 
-
 # Route for handling Shortest Seek Time First (SSTF) algorithm
+
+
 @app.route('/SSTF', methods=['POST'])
 def SSTF():
     # Extracting input values from the form

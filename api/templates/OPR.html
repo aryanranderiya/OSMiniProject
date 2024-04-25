@@ -48,32 +48,40 @@
         <h1>Optimal Page Replacement Simulator</h1>
         <div id="form-section">
             <form id="page-replacement-form" method="post" action="/OPR">
-                <label for="pages">Page References (comma-separated):</label><br>
-                <input type="text" id="pages" name="pages" placeholder="e.g., 1,2,3,4"><br>
+                <br> Try this Example for page references: 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1 &emsp;
+                Capacity: 4<br><br <label for="pages">Page References (comma-separated):</label><br>
+                <input type="text" id="pages" name="pages" placeholder="e.g., 1,2,3,4,1,2,5,1,2,3,4,5" required><br>
                 <label for="capacity">Capacity of Page Frames:</label><br>
-                <input type="number" id="capacity" name="capacity" min="1" placeholder="e.g., 3"><br><br>
+                <input type="number" id="capacity" name="capacity" min="1" placeholder="e.g., 3" required><br><br>
                 <input type="submit" value="Simulate" id="submit_btn">
             </form>
 
         </div>
+
+        <!-- Display Results Section -->
         {% if page_faults is not none %}
         <div id="result-section">
             <h2>Result</h2>
-            <p>Number of Page Faults: {{ page_faults }}</p>
+            <!-- Summary of the page replacement process -->
+            <p>Total Number of Page Faults: {{ page_faults }}</p>
+            <!-- Detailed information about each page fault -->
             {% if page_fault_details %}
             <h3>Page Fault Details</h3>
             <ul>
                 {% for detail in page_fault_details %}
-                <li>Page: {{ detail.page }}, Replaced Page: {{ detail.replaced_page }}, Page Frames: {{
-                    detail.page_frames
-                    }}
+                <li>
+                    <!-- Display page replacement details -->
+                    <p>Page: {{ detail.page }}</p>
+                    <p>Replaced Page: {{ detail.replaced_page }}</p>
+                    <p>Page Frames: {{ detail.page_frames }}</p>
+                    <!-- Optionally, display future occurrences of pages -->
+                    <!-- <p>Future Occurrences: {{ detail.future_occurrences }}</p> -->
                 </li>
                 {% endfor %}
             </ul>
             {% endif %}
         </div>
         {% endif %}
-
 
     </div>
 </body>
