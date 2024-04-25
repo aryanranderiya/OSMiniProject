@@ -4,12 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shortest Seek Time</title>
+    <title>SSTF Disk Scheduling</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">
 </head>
 
 <body>
+    <center>
+        <h1>SSTF Disk Scheduling</h1>
 
+        <h2>Introduction to SSTF Disk Scheduling</h2>
+        <div class="info">
+            <p>
+                Shortest Seek Time First (SSTF) is a disk scheduling algorithm used to optimize the seek time of a
+                disk drive. The seek time is the time taken by the disk arm to move to the desired track to read or
+                write data.
+            </p>
+            <p>
+                In SSTF, the operating system selects the disk I/O request that requires the least disk arm movement
+                from its current position to the requested position. By selecting the closest request to the current
+                position, SSTF aims to minimize the seek time and improve the overall disk performance.
+            </p>
+            <p>
+                SSTF is a type of Elevator Algorithm, which is designed to efficiently handle requests in both
+                directions of disk movement. It belongs to a family of disk scheduling algorithms that includes SCAN
+                and C-SCAN.
+            </p>
+        </div>
+
+        <h2>SSTF Simulator</h2>
+        <form method="post" action="/">
+            <label for="initial_position">Initial Position:</label>
+            <input type="number" id="initial_position" name="initial_position" placeholder="Example: 50"
+                required><br><br>
+            <label for="max_requests">Max Requests:</label>
+            <input type="number" id="max_requests" name="max_requests" placeholder="Example: 10" required><br><br>
+            <label for="max_position">Max Position:</label>
+            <input type="number" id="max_position" name="max_position" placeholder="Example: 100" required><br><br>
+            <label for="random_seed">Random Seed:</label>
+            <input type="number" id="random_seed" name="random_seed" placeholder="Example: 12345" required><br><br>
+            <input type="submit" id="submit_btn"></input>
+        </form>
+        {% if sequence %}
+        <h2>Sequence:</h2>
+        <table>
+            <tr>
+                <th>Step</th>
+                <th>Request</th>
+                <th>Distance</th>
+            </tr>
+            {% for i in range(sequence|length) %}
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ sequence[i][0] }}</td>
+                <td>{{ sequence[i][1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3>Total Seek Time: {{ total_seek_time }}</h3>
+        {% endif %}
+    </center>
 </body>
 
 </html>

@@ -24,18 +24,19 @@ input {
 input {
   padding: 0.5% 5%;
   margin: 0.5%;
-  border-radius: 10px;
+  border-radius: 999px;
   text-align: center;
   color: black;
   border: none;
 }
 
 #submit_btn {
-  padding: 0.6% 5%;
+  padding: 10px 50px;
   background-color: #00bbff;
   border: 2px solid #00bbff;
   font-weight: bold;
   font-size: 0.8em;
+  border-radius: 999px;
 }
 
 #submit_btn:hover {
@@ -58,6 +59,7 @@ th {
 table {
   border: 1px solid white;
   border-collapse: collapse;
+  margin-top: 7%;
 }
 .process_table_div {
   width: 100%;
@@ -69,4 +71,38 @@ table {
 
 .process_table {
   margin: 2%;
+}
+
+.info {
+  width: 900px;
+  text-align: justify;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+}
+h2 {
+  margin-top: 30px;
+}
+
+form {
+  text-align: center;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  box-sizing: border-box;
 }
