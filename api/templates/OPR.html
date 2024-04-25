@@ -11,6 +11,40 @@
 <body>
     <div class="container">
 
+        <h1>Optimal Page Replacement Algorithm</h1>
+
+        <div class="info">
+            <p>
+                Optimal Page Replacement is an algorithm used to manage memory in a computer system, particularly in the
+                context
+                of virtual memory management. Its goal is to minimize the number of page faults, which occur when a
+                requested
+                page is not found in the main memory (RAM) and must be retrieved from secondary storage (e.g., disk).
+            </p>
+            <p>
+                The algorithm works by predicting the future page accesses and replacing the page in memory that will
+                not be
+                accessed for the longest time. To accomplish this, it requires knowledge of the future page accesses,
+                which is
+                usually not available in real-world systems. As a result, the Optimal Page Replacement algorithm is used
+                as a
+                theoretical reference to measure the performance of other page replacement algorithms.
+            </p>
+            <p>
+                Despite its theoretical nature, understanding the Optimal Page Replacement algorithm can provide
+                insights into
+                the importance of optimal memory management and the trade-offs involved in designing efficient page
+                replacement strategies.
+            </p>
+            <p>
+                One challenge with the Optimal Page Replacement algorithm is its impracticality in real-world scenarios
+                due to
+                the need for future page access information. However, it serves as a benchmark for evaluating the
+                performance
+                of other page replacement algorithms, such as LRU (Least Recently Used) and FIFO (First-In-First-Out).
+            </p>
+        </div>
+
         <h1>Optimal Page Replacement Simulator</h1>
         <div id="form-section">
             <form id="page-replacement-form" method="post" action="/OPR">
