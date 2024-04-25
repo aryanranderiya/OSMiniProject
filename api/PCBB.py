@@ -88,7 +88,7 @@ class Monitor:
         # With is used for exceptional handling
         with self.monitor_lock:
 
-            time.sleep(random.uniform(0, 2))  # Simulate some running time
+            # time.sleep(random.uniform(0, 2))  # Simulate some running time
 
             buffer_count = len(self.buffer)  # Number of elements in the buffer
 

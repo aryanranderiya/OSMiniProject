@@ -42,38 +42,34 @@ def selectedOption():
 
 @app.route('/SRTN', methods=['GET', 'POST'])
 def SRTN():
-    if request.method == 'POST':
-        # Get arrival times and burst times from the form
-        arrival_times = list(
-            map(int, request.form.get('arrival_times').split(' ')))
-        burst_times = list(
-            map(int, request.form.get('burst_times').split(' ')))
+    # Get arrival times and burst times from the form
+    arrival_times = list(
+        map(int, request.form.get('arrival_times').split(' ')))
+    burst_times = list(
+        map(int, request.form.get('burst_times').split(' ')))
 
-        # Calculate completion time, turnaround time, and waiting time using SRTN algorithm
-        completion_time, turnaround_time, waiting_time = srtf(
-            arrival_times, burst_times)
+    # Calculate completion time, turnaround time, and waiting time using SRTN algorithm
+    completion_time, turnaround_time, waiting_time = srtf(
+        arrival_times, burst_times)
 
-        # Prepare job information for rendering in the template
-        jobs_info = []
-        for i in range(len(arrival_times)):
-            job_info = {
-                'JobName': f'Job {i+1}',
-                'Arrival Time': arrival_times[i],
-                'Burst Time': burst_times[i],
-                'Finish Time': completion_time[i],
-                'Turnaround Time': turnaround_time[i],
-                'Waiting Time': waiting_time[i]
-            }
-            jobs_info.append(job_info)
+    # Prepare job information for rendering in the template
+    jobs_info = []
+    for i in range(len(arrival_times)):
+        job_info = {
+            'JobName': f'Job {i+1}',
+            'Arrival Time': arrival_times[i],
+            'Burst Time': burst_times[i],
+            'Finish Time': completion_time[i],
+            'Turnaround Time': turnaround_time[i],
+            'Waiting Time': waiting_time[i]
+        }
+        jobs_info.append(job_info)
 
-        # Render the SRTN template with job information
-        return render_template('SRTN.html', jobs_info=jobs_info)
+    # Render the SRTN template with job information
+    return render_template('SRTN.html', jobs_info=jobs_info)
 
-    return render_template('SRTN.html')
 
 # Route for handling Producer-Consumer Buffer Bound (PCBB) algorithm
-
-
 @app.route("/PCBB", methods=["POST"])
 def app_ProducerConsumer():
 
@@ -97,6 +93,8 @@ def app_ProducerConsumer():
     return render_template('PCBB.html', zipped_data=zipped_data)
 
 # Route for handling Optimal Page Replacement (OPR) algorithm
+
+
 @app.route('/OPR', methods=['GET', 'POST'])
 def OPR():
 
@@ -115,7 +113,7 @@ def OPR():
 
 
 # Route for handling Shortest Seek Time First (SSTF) algorithm
-@app.route('/SSTF', methods=['GET', 'POST'])
+@app.route('/SSTF', methods=['POST'])
 def SSTF():
     # Extracting input values from the form
     # Initial position of the disk head
